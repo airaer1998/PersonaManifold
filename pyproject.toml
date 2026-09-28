@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "personamanifold"
+version = "0.1.0"
+description = "A minimal reference implementation of PersonaManifold (NeurIPS 2026)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "Rui Xu"}, {name = "Yinghui Xu"}, {name = "Libo Wu"}]
+dependencies = ["numpy>=1.24,<3", "scipy>=1.10,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "build>=1"]
+plot = ["matplotlib>=3.7"]
+
+[project.urls]
+Repository = "https://github.com/airaer1998/PersonaManifold"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

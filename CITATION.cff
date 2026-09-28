@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this reference implementation, please cite the PersonaManifold paper."
+title: "PersonaManifold: Revealing and Exploiting Curved Geometry in LLM Persona Representations"
+type: software
+version: 0.1.0
+license: MIT
+repository-code: "https://github.com/airaer1998/PersonaManifold"
+authors:
+  - family-names: Xu
+    given-names: Rui
+    affiliation: "Fudan University; Shanghai Innovation Institute"
+  - family-names: Xu
+    given-names: Yinghui
+    affiliation: "Fudan University"
+  - family-names: Wu
+    given-names: Libo
+    affiliation: "Fudan University; Shanghai Innovation Institute"
+preferred-citation:
+  type: conference-paper
+  title: "PersonaManifold: Revealing and Exploiting Curved Geometry in LLM Persona Representations"
+  authors:
+    - family-names: Xu
+      given-names: Rui
+    - family-names: Xu
+      given-names: Yinghui
+    - family-names: Wu
+      given-names: Libo
+  collection-title: "Advances in Neural Information Processing Systems"
+  year: 2026
+  notes: "Accepted to NeurIPS 2026."
