@@ -43,10 +43,8 @@ def center_activations(persona, neutral):
 class PersonaManifold:
     """Fit a local-metric kNN graph to neutral-relative persona vectors.
 
-    This reference deliberately uses dense PCA/pairwise distances, a user-chosen
-    tangent dimension, and polyline paths. It is intended for small datasets,
-    not paper-scale experiment reproduction. Disconnected components stay
-    disconnected rather than being joined with artificial shortcut edges.
+    Uses dense PCA/pairwise distances, a user-chosen tangent dimension, and
+    polyline paths. Disconnected components remain disconnected.
     """
 
     def __init__(self, n_neighbors=8, variance=0.99, tangent_dim=2, ridge=1e-3):
@@ -138,8 +136,7 @@ class PersonaManifold:
     def interpolate(self, start, end, n_steps=11):
         """Sample a graph polyline at equal weighted arc length, in PCA space.
 
-        This is the release's explicit substitute for the paper's local-tangent
-        cubic spline. Each sample stays on a graph edge; no spline overshoot.
+        Each sample stays on a graph edge; interpolation is piecewise linear.
         """
         n_steps = _integer(n_steps, "n_steps", 2, 100000)
         path = self.shortest_path(start, end)

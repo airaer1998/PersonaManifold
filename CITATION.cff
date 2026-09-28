@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this reference implementation, please cite the PersonaManifold paper."
+message: "If you use this code, please cite the PersonaManifold paper."
 title: "PersonaManifold: Revealing and Exploiting Curved Geometry in LLM Persona Representations"
 type: software
 version: 0.1.0

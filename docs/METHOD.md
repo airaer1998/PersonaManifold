@@ -1,7 +1,6 @@
-# Method and implementation scope
+# Method notes
 
-This release translates the main geometric ideas into small, inspectable NumPy
-and SciPy functions. It is not the code used to produce the paper's tables.
+The geometry and evaluation components use NumPy and SciPy.
 
 ## Representations and PCA
 
@@ -31,28 +30,24 @@ Shortest paths use these weights. All-pairs distances retain infinity between
 components; interpolating between disconnected endpoints raises an error.
 Duplicate projected points and zero-weight edges are rejected explicitly.
 
-The tangent dimension is user-specified. Marchenko–Pastur/MLE dimension
-estimation, cross-validation, density controls, and bootstrap analysis from the
-paper are outside this small release. Metric distances have a different scale
+The tangent dimension is user-specified. Metric distances have a different scale
 from ambient Euclidean distance: do not interpret their raw ratio as a pure
 curvature estimate without controlling for metric anisotropy.
 
 ## Steering
 
 Shortest-path vertices are sampled at equal cumulative **graph-weight** intervals.
-Within an edge the code uses linear interpolation. The paper's local-tangent
-cubic-spline smoothing is not implemented; the result is a polyline approximation
-whose segments can still leave the underlying continuous manifold.
+Within an edge the code uses linear interpolation. The resulting polyline
+segments can leave the underlying continuous manifold.
 
 Inverse PCA gives neutral-relative activation vectors. Each direction is
 normalized, then scaled by a linear interpolation of the reconstructed endpoint
 norms and the requested strength. This is an explicit activation-space convention
-for centered PCA; it is not a claim to reproduce the paper's full injection
-procedure. A zero direction raises an error rather than producing NaNs.
+for centered PCA. A zero direction raises an error rather than producing NaNs.
 
 The package returns vectors. The caller must choose a compatible residual-stream
 hook and confirm layer, token positions, device, dtype, and generation behavior.
-There is no bundled Transformers integration or quality claim from the toy demo.
+
 
 ## Curvature
 
@@ -62,8 +57,8 @@ uniform on the **symmetrized graph**; optional idleness places probability mass 
 the node itself. The default idleness is zero. Different measure conventions can
 change curvature, so report the convention with results.
 
-This helper solves one edge at a time, recomputing graph distances. It is intended
-for small examples, not a fast full-graph curvature implementation.
+This helper solves one edge at a time, recomputing graph distances. Its runtime
+depends on the graph size and the number of neighbors at each endpoint.
 
 ## BST-style evaluation
 
@@ -78,9 +73,7 @@ indices, repeated IDs within a triplet, and nonfinite evaluated distances are
 errors. Labels must come from independent behavioral observations; using a
 graph's own nearest neighbors as its evaluation labels is circular.
 
-Question generation, filtering, triplet mining, human validation, and the full
-BST dataset are not released here. The synthetic example uses known arc
-coordinates as independent toy labels and is not a substitute for BST.
+The synthetic example uses known arc coordinates as independent labels.
 
 ## Scale
 

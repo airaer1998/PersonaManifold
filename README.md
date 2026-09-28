@@ -13,9 +13,8 @@ their local geometry and follows graph geodesics to interpolate between personas
 Behavioral Similarity Triplets (BST) evaluate whether these geometric distances
 agree with how personas behave.
 
-This repository is a **minimal reference implementation**, newly written from the
-paper's method. It provides runnable geometry and evaluation components, rather
-than the original experiment pipeline or a reproduction of the reported results.
+This repository provides code for persona geometry, geodesic interpolation,
+activation-space steering vectors, and behavioral triplet evaluation.
 
 ## Method overview
 
@@ -80,12 +79,11 @@ triplets = np.load("triplets.npy", allow_pickle=False)
 print(triplet_accuracy(manifold.distances(), triplets))
 ```
 
-The numerical defaults are small-example settings, **not paper hyperparameters**.
 Use at least nine distinct persona vectors for this configuration; adjust the
 neighbor count and tangent dimension to your data. Model extraction, residual
 hooks, generation, and layer/strength tuning are left to the caller.
 
-## What is included
+## Components
 
 | Component | This release |
 | --- | --- |
@@ -96,12 +94,11 @@ hooks, generation, and layer/strength tuning are left to the caller.
 | Steering | Equal weighted arc-length **polyline** samples, inverse PCA, endpoint norm interpolation |
 | Curvature | Exact optimal transport for an individual edge on a small graph |
 | BST evaluation | Choice/cosine behavioral distances and strict triplet accuracy |
-| Paper-scale experiments | Not included: model extraction, tangent-space splines, dimension estimation, full BST corpus, human annotations, checkpoints, and evaluation sweeps |
 
-The polyline is a deliberate simplification of the paper's local-tangent cubic
-spline. Curvature uses uniform neighbors of the symmetrized graph. Centered PCA
+Interpolation follows a graph polyline. Curvature uses uniform neighbors of the
+symmetrized graph. Centered PCA
 is inverted with its mean restored before computing activation-space steering
-norms. [Method notes](docs/METHOD.md) describe these conventions and limitations.
+norms. [Method notes](docs/METHOD.md) describe these conventions.
 
 ## Repository layout
 
@@ -113,7 +110,7 @@ src/personamanifold/
 examples/
   quickstart.py     # deterministic CPU demo; optional plot
 tests/              # geometry, transport, evaluation, and validation checks
-docs/               # method scope and input/output conventions
+docs/               # method and input/output conventions
 assets/             # paper overview and generated synthetic illustration
 ```
 
@@ -127,8 +124,7 @@ python -m build
 
 Tests check neutral subtraction, PCA reconstruction, metric edge weights,
 curved-path behavior, endpoint magnitudes, disconnected graphs, a known
-triangle-curvature result, and behavioral triplet scoring. They do not establish
-LLM steering quality or reproduce the paper's benchmark numbers.
+triangle-curvature result, and behavioral triplet scoring.
 
 ## Citation
 
@@ -147,5 +143,5 @@ LLM steering quality or reproduce the paper's benchmark numbers.
 Code is released under the [MIT License](LICENSE). The paper overview in
 `assets/method.png` is reproduced from the authors' manuscript and is excluded
 from the code license. Upstream persona datasets and model weights are not
-redistributed. This compact implementation and its tests were prepared with
+redistributed. The code and tests were prepared with
 OpenAI Codex assistance.

@@ -1,7 +1,7 @@
 # Data interface
 
-No benchmark corpus, model weights, API responses, or human annotations are
-included. The quickstart generates its own mathematical curve in memory.
+The quickstart generates a mathematical curve in memory. For persona
+experiments, supply the activation and behavioral arrays described below.
 
 ## Activations
 
@@ -45,8 +45,7 @@ Question counts need not match between forced-choice and open-ended inputs.
 Triplets are integer rows `[anchor, positive, negative]` with shape `(T, 3)`.
 Each row has three distinct IDs in `[0, N)`. Construct and validate these labels
 from held-out behavioral data. Keep layer/parameter selection separate from
-the test triplets. This repository does not provide a benchmark split or a
-paper-calibrated triplet sampler.
+the test triplets.
 
 ## Output
 

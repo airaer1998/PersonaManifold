@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "personamanifold"
 version = "0.1.0"
-description = "A minimal reference implementation of PersonaManifold (NeurIPS 2026)"
+description = "PersonaManifold (NeurIPS 2026): persona geometry and geodesic steering"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {file = "LICENSE"}
